@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@base {
+  h3 {
+    @apply text-xl font-semibold;
+  }
+  h2 {
+    @apply text-2xl font-semibold;
+  }
+  h1 {
+    @apply text-3xl font-bold;
+  }
+}
+@layer components {
+  .btn {
+    @apply text-blue-500 font-semibold px-3 py-1;
+  }
+  .btn-active {
+    @apply text-blue-500  ring-2 ring-blue-500  px-3 py-1 rounded-md;
+  }
+  .btn-hover {
+    @apply hover:bg-blue-500 hover:text-white transition-all;
+  }
+
+  .container {
+    max-width: 1200px;
+    @apply mx-auto;
+  }
+  .blog-container {
+    max-width: 800px;
+    @apply mx-auto;
+  }
+  .card-blog {
+    @apply rounded-md shadow hover:shadow-2xl  transition-all;
+  }
+}
+
+.ql-editor {
+  min-height: 450px !important;
+  overflow: auto;
+}
