@@ -53,7 +53,6 @@ exports.signupController = async (req, res, next) => {
 exports.singinPostController = async (req, res, next) => {
     try {
         const { email, password } = req.body;
-        console.log(req.body);
         const std = await Auth.findOne({ email: email });
         if (!std) {
             return res.status(404).json({

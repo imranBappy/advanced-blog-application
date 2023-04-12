@@ -13,7 +13,6 @@ exports.dashboardBlogsGetController = async (req, res, next) => {
     }
     try {
         const user = await Auth.findById(req.user._id)
-        console.log(user);
         if (!user) {
             let error = new Error('User Unauthenticated')
             error.status = 404

@@ -24,7 +24,6 @@ const upload = multer({
         fileSize: (1024 * 1024) * 10 // mb
     },
     fileFilter: (req, file, cb) => {
-        console.log(27, { file });
         if (
             file.mimetype === 'image/png' ||
             file.mimetype === 'image/jpeg' ||
