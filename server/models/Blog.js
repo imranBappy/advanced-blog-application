@@ -8,7 +8,10 @@ const blogSchema = new Schema({
         min: 2,
         require: true
     },
-    thumbnail: String,
+    thumbnail: {
+        data: Buffer,
+        contentType: String
+    },
     content: {
         type: String,
         require: true
