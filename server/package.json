@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Advance Blog Application",
+  "description": "Institute Management System",
   "main": "server",
   "scripts": {
     "start": "node server",
@@ -27,6 +27,8 @@
     "mongoose": "^6.9.1",
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.1",
+    "react-truncate": "^2.4.0",
+    "truncate-html": "^1.0.4",
     "uuidv4": "^6.2.13"
   },
   "engines": {

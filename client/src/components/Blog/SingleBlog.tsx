@@ -4,6 +4,8 @@ const url = "http://localhost:5000";
 
 const SingleBlog = (props: any) => {
   const { title, thumbnail, content } = props.blog;
+  console.log(thumbnail);
+
   return (
     <div>
       {thumbnail && (

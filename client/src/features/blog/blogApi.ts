@@ -8,7 +8,8 @@ export const blogApi = apiSlice.injectEndpoints({
                 url: '/blog',
                 method: 'POST',
                 body
-            })
+            }),
+            invalidatesTags: ['Blogs']
         }),
         getBlogs: builder.query({
             query: () => `/blog`,

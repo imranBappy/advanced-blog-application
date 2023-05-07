@@ -5,13 +5,6 @@ const url = "http://localhost:5000";
 
 const Blog = (props: any) => {
   const { title, thumbnail, content, author, _id } = props.blog;
-  const dataUrl = `data:${thumbnail.contentType};base64,${btoa(
-    new Uint8Array(thumbnail.data.data).reduce(
-      (data, byte) => data + String.fromCharCode(byte),
-      ""
-    )
-  )}`;
-
   return (
     <div className="card-blog mb-5">
       <Link href={`/blog/${_id}`}>
@@ -19,7 +12,7 @@ const Blog = (props: any) => {
           <div>
             <Image
               className="rounded-t-lg"
-              src={dataUrl}
+              src={`${url}${thumbnail}`}
               alt="Next.js Logo"
               width={800}
               height={500}

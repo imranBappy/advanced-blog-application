@@ -1,34 +1,29 @@
 const Auth = require('../models/Auth')
 const Blog = require('../models/Blog')
 const Comment = require('../models/Comment')
-const fs = require('fs');
-const path = require('path');
+
 const truncate = require('../utils/truncate')
 
 
 // blog post controller
 exports.blogPostController = async (req, res, next) => {
     let { title, content } = req.body
-    let uploadPath = path.join(__dirname).split('\\');
-    uploadPath.pop()
-    uploadPath = uploadPath.join('\\');
-    const thumbnail = {
-        data: fs.readFileSync(uploadPath + "\\public\\uploads\\" + req.file.filename),
-        contentType: 'image/png'
-    }
+
+
+    let blog = new Blog({
+        title,
+        content,
+        author: req.user._id,
+        thumbnail: req.file ? `/uploads/${req.file?.filename}` : "",
+        likes: [],
+    })
     try {
-        const createdBlog = await Blog.create({
-            title,
-            content,
-            author: req.user._id,
-            thumbnail: thumbnail,
-            likes: [],
-        })
+        let createdBlog = await blog.save()
         await Auth.findOneAndUpdate(
             { user: req.user._id },
             { $push: { 'blogs': createdBlog._id } }
         )
-        res.json({ blog: createdBlog })
+        res.json({ blog })
     } catch (e) {
         next(e)
     }
@@ -115,4 +110,3 @@ exports.blogDeleteController = async (req, res, next) => {
         next(error)
     }
 }
-
