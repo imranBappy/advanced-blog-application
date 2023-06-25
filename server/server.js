@@ -7,6 +7,7 @@ const setMiddlewares = require('./middlewares');
 const Formet = require('./utils/dataFormet');
 const cors = require('cors')
 const morgan = require('morgan')
+// const cloudinary = require('cloudinary').v2;
 
 const app = express();
 
@@ -22,14 +23,30 @@ app.use(express.static(__dirname + '\\public'))
 app.use(cors());
 //set middlewares
 setMiddlewares(app)
-
 // all routes set here
 setRoutes(app)
 
-app.get('/', (req, res) => res.send("Hello World"))
 
 
-// handle 404
+// Return "https" URLs by setting secure: true
+// cloudinary.config({
+//     cloud_name: 'do5erbtee',
+//     api_key: '155916269871985',
+//     api_secret: 'z4TuFcGuRJvBs9d7crwxXGjFR0Q'
+// });
+
+// Log the configuration
+// console.log(cloudinary.config());
+
+// const filePath = "./imran.jpg";
+
+// cloudinary.uploader.upload(filePath, ).then((result) => {
+//     console.log(result);
+// }).catch((error) => { console.log(error) });
+// cloudinary.uploader.upload(filePath, { timeout: 100 }, function (error, result) {
+//     console.log({ result, error });
+// });
+
 app.use((req, res, next) => {
     res.status(404).json({ error: 'Not Found' })
 })

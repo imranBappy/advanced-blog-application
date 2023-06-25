@@ -4,17 +4,14 @@ const Comment = require('../models/Comment')
 
 const truncate = require('../utils/truncate')
 
-
 // blog post controller
 exports.blogPostController = async (req, res, next) => {
     let { title, content } = req.body
-
-
     let blog = new Blog({
         title,
         content,
         author: req.user._id,
-        thumbnail: req.file ? `/uploads/${req.file?.filename}` : "",
+        thumbnail: req.file ? `${req.file?.path}` : "",
         likes: [],
     })
     try {
