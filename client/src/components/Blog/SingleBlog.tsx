@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-const url = "http://localhost:5000";
+
 
 const SingleBlog = (props: any) => {
   const { title, thumbnail, content } = props.blog;
@@ -12,7 +12,7 @@ const SingleBlog = (props: any) => {
         <div>
           <Image
             className="rounded-t-lg"
-            src={`${url}${thumbnail}`}
+            src={`${thumbnail}`}
             alt="Next.js Logo"
             width={800}
             height={500}

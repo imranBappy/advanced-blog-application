@@ -34,6 +34,7 @@ export default function Blog() {
         <SingleBlogLoader />
       </>
     );
+
   if (isError) content = <Error />;
   if (blog) content = <SingleBlog blog={blog} />;
   const handleScroll = () => {

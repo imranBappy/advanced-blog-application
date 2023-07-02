@@ -1,7 +1,6 @@
 import DashboardBlog from "@/components/Blog/DashboardBlog";
 import Card from "@/components/Dashboard/Card";
 import Layout from "@/components/Layout/Layout";
-import Post from "@/components/Post/Post";
 import PrivateRoute from "@/components/PrivateRoute/PrivateRoute";
 import React from "react";
 

@@ -7,6 +7,7 @@ import { useGetBlogsQuery } from "@/features/blog/blogApi";
 export default function Home() {
   const { data: blogs, isError, isLoading, error } = useGetBlogsQuery();
   let content = null;
+
   if (isLoading)
     content = (
       <>
@@ -16,18 +17,20 @@ export default function Home() {
       </>
     );
   if (isError) content = <Error />;
+  if (!blogs)
+    content = (
+      <>
+        <BlogLoader />
+        <BlogLoader />
+        <BlogLoader />
+      </>
+    );
   if (blogs)
     content = blogs.map((blog: any) => <Blog key={blog._id} blog={blog} />);
-
   return (
     <>
       <Layout>
-        <div className="blog-container mt-24">
-          
-          {content}
-        
-        
-        </div>
+        <div className="blog-container mt-24">{content}</div>
       </Layout>
     </>
   );

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "name",
+        "label": "Full Name",
+        "type": "text",
+        "placeholder": "John Doe",
+        "required": "Name is required"
+    },
+    {
+        "id": 2,
+        "name": "email",
+        "label": "Email",
+        "type": "email",
+        "placeholder": "john@gmail.com",
+        "required": "Email Address is required"
+    },
+    {
+        "id": 3,
+        "name": "bio",
+        "label": "Bio",
+        "type": "text"
+    },
+    {
+        "id": 4,
+        "name": "address",
+        "label": "Address",
+        "type": "text"
+    },
+    {
+        "id": 5,
+        "name": "website",
+        "label": "Website",
+        "type": "text"
+    },
+    {
+        "id": 6,
+        "name": "github",
+        "label": "Github",
+        "type": "text"
+    }
+]

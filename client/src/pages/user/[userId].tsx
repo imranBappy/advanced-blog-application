@@ -8,47 +8,71 @@ import { FaExternalLinkAlt } from "react-icons/fa";
 import { AiOutlineGithub } from "react-icons/ai";
 import DashboardBlog from "@/components/Blog/DashboardBlog";
 import PrivateRoute from "@/components/PrivateRoute/PrivateRoute";
+import Link from "next/link";
+import { useRouter } from "next/router";
 
 const Profile = () => {
-  const { name }: any = useSelector((state: any) => state?.auth?.user) || {};
+  const { name, email, url, bio, address, website, github }: any =
+    useSelector((state: any) => state?.auth?.user) || {};
+  const router = useRouter();
+  console.log({ url, email });
 
   return (
     <PrivateRoute>
       <Layout>
         <div className=" -mt-4">
           <div className=" w-full h-40 bg-blue-900"></div>
-          <div className="shadow-xl ring-1 ring-gray-400 px-5 pb-5 rounded blog-container -mt-16 mb-10 bg-white">
+          <div className=" relative shadow-xl ring-1 ring-gray-400 px-5 pb-5 rounded blog-container -mt-16 mb-10 bg-white">
+            <div className=" absolute right-0 m-3">
+              <Link href={`/user/update/${router?.query?.userId}`}>
+                <button className=" btn h-10 active">Edit Profile</button>
+              </Link>
+            </div>
+
             <div className=" w-full flex justify-center ">
               <Image
-                src={"/imran.png"}
+                src={url}
                 className="rounded-full -mt-14 ring-4 ring-blue-900"
                 alt="profile"
                 width={120}
                 height={120}
               />
             </div>
+
             <div>
               <h1 className="text-center mt-3 text-2xl font-bold">{name}</h1>
-              <p className="text-center text-md mt-1">Full Stack Developer</p>
+              {bio && <p className="text-center text-md mt-1">{bio}</p>}
             </div>
+
             <div className="my-3">
-              <ul className="flex flex-wrap gap-5">
-                <li className="flex items-center gap-2">
-                  <IoLocationSharp /> <span>Khulna, Bangladesh</span>
-                </li>
+              <ul className="flex flex-wrap gap-5  justify-center">
+                {address && (
+                  <li className="flex items-center gap-2">
+                    <IoLocationSharp /> <span>{address}</span>
+                  </li>
+                )}
+
                 <li className="flex items-center gap-2">
                   <MdEmail />
-                  <span>imranbappy.official@gmail.com</span>
+                  <span>{email}</span>
                 </li>
-                <li className="flex items-center gap-2">
-                  <FaExternalLinkAlt />
-                  <span>https://imranbappy.me</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <a href="https://github.com/imranBappy">
-                    <AiOutlineGithub />
-                  </a>
-                </li>
+
+                {website && (
+                  <li className="flex items-center gap-2">
+                    <a href={website}>
+                      <FaExternalLinkAlt />
+                    </a>
+                    <span>{website}</span>
+                  </li>
+                )}
+
+                {website && (
+                  <li className="flex items-center gap-2">
+                    <a href={github}>
+                      <AiOutlineGithub />
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

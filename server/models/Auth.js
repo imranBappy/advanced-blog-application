@@ -8,10 +8,7 @@ const authSchema = new Schema({
         min: 2,
         max: 30
     },
-    url: {
-        type: String,
-        default: 'https://imranbappy.me/_ipx/w_640,q_75/%2F_next%2Fstatic%2Fmedia%2Fimran-hosen.51750c04.png?url=%2F_next%2Fstatic%2Fmedia%2Fimran-hosen.51750c04.png&w=640&q=75',
-    },
+    url: String,
     role: {
         type: String,
         required: [true, 'Role is require!'],
@@ -35,12 +32,17 @@ const authSchema = new Schema({
         type: Boolean,
         default: false
     },
+    bio: String,
+    address: String,
+    website: String,
+    github: String,
     blogs: [
         {
             type: Schema.Types.ObjectId,
             ref: 'Blog'
         }
     ],
+
 
 }, { timestamps: true })
 

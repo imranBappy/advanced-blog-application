@@ -1,9 +1,11 @@
 import React from "react";
-
-const Thumbnail = (props: any) => {
+/*
+https://imranbappy.me/_ipx/w_640,q_75/%2F_next%2Fstatic%2Fmedia%2Fimran-hosen.51750c04.png?url=%2F_next%2Fstatic%2Fmedia%2Fimran-hosen.51750c04.png&w=640&q=75
+*/
+const ProfileImage = (props: any) => {
   return (
     <div>
-      <div className="flex items-center justify-center w-full">
+      <div className="flex items-center justify-center   ">
         <label
           style={
             props.url && {
@@ -13,8 +15,18 @@ const Thumbnail = (props: any) => {
             }
           }
           htmlFor="thumbnail"
-          className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+          className="flex flex-col items-center justify-center w-72 h-72 border-2 border-gray-300 border-dashed rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
         >
+          {props.url && (
+            <p
+              style={{ background: "rgb(0 0 0 / 56%)" }}
+              className=" mt-40 text-sm text-gray-500 dark:text-gray-400"
+            >
+              <span className="font-semibold">Click to upload</span> or drag and
+              drop
+            </p>
+          )}
+
           {!props.url && (
             <div className="flex flex-col items-center justify-center pt-5 pb-6">
               <>
@@ -44,7 +56,7 @@ const Thumbnail = (props: any) => {
             </div>
           )}
           <input
-            onChange={(e:any) => props.setThumbnail(e.target.files[0])}
+            onChange={(e: any) => props.setImage(e.target.files[0])}
             name="thumbnail"
             id="thumbnail"
             type="file"
@@ -56,4 +68,4 @@ const Thumbnail = (props: any) => {
   );
 };
 
-export default Thumbnail;
+export default ProfileImage;

@@ -23,7 +23,7 @@ export const authApi = apiSlice.injectEndpoints({
                     localStorage.setItem("auth", JSON.stringify(result.data));
                     dispatch(userLoggedIn(result.data));
                 } catch (error: any) {
-                    toast.error('error.error.data.error')
+                    toast.error(error.error.data.error);
                     // queryRejected(error);
                 }
             },
@@ -37,16 +37,35 @@ export const authApi = apiSlice.injectEndpoints({
             async onQueryStarted(body, { dispatch, queryFulfilled, requestId }:any) {
                 try {
                     const result = await queryFulfilled;
-                    console.log({ result });
                     localStorage.setItem("auth", JSON.stringify(result.data));
                     dispatch(userLoggedIn(result.data));
-                    //  toast.success('Successfully Logedin!')
+                     toast.success('Successfully Logedin!')
                 } catch (error:any) {
                     toast.error(error.error.data.error)
+                }
+            },
+        }),
+        update: builder.mutation({
+            query: (body) => ({
+                url: "/auth/update",
+                method: "PUT",
+                body,
+            }),
+            async onQueryStarted(body, { dispatch, queryFulfilled, requestId }: any) { 
+                try {
+                    const result = await queryFulfilled;
+                    const previousData = JSON.parse(localStorage.getItem("auth") || "{}");
+                    previousData.data = result.data;
+                    localStorage.setItem("auth", JSON.stringify(previousData));
+                    dispatch(userLoggedIn(previousData));
+                    toast.success('Successfully Updated!')
+                } catch (error: any) {
+                    console.log(error);
+                    toast.error('There is an error')
                 }
             },
         }),
     }),
 })
 
-export const { useLoginMutation, useRegisterMutation } = authApi;
+export const { useLoginMutation, useRegisterMutation, useUpdateMutation } = authApi;

@@ -10,7 +10,6 @@ import {
 import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-const URL = "http://localhost:5000";
 
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 export default function UpdateBlog(props: any) {
@@ -24,7 +23,7 @@ export default function UpdateBlog(props: any) {
     { data, isLoading: updateLoading, isError: updateError, error },
   ] = useUpdateBlogMutation();
 
-  const [thumbnail, setThumbnail] = useState("");
+  const [, setThumbnail] = useState("");
   const [url, setUrl] = useState(null);
 
   useEffect(() => {
@@ -32,8 +31,7 @@ export default function UpdateBlog(props: any) {
     if (blog && !isError && !isLoading) {
       setTitle(blog.title);
       setContent(blog.content);
-
-      if (blog.thumbnail) setUrl(`${URL}${blog.thumbnail}`);
+      if (blog.thumbnail) setUrl(`${blog.thumbnail}`);
     }
   }, [blog, isError, isLoading]);
   useEffect(() => {

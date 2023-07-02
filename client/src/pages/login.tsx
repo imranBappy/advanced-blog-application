@@ -7,7 +7,6 @@ import SubmitBtn from "@/components/InputField/SubmitBtn";
 import Link from "next/link";
 import { useLoginMutation } from "@/features/auth/authApi";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 type UserType = {
   requestId?: undefined;
@@ -68,7 +67,7 @@ const Login = () => {
                   watch={watch}
                 />
               ))}
-              <SubmitBtn value="Login" />
+              <SubmitBtn value={"Login"} disabled={false} />
             </div>
           </form>
 

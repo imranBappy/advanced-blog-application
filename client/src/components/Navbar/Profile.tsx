@@ -15,7 +15,7 @@ const Profile = (props: any) => {
         <Image
           onClick={() => setShowMenu(!showMenu)}
           className="rounded-full ring-4 ring-blue-500 cursor-pointer"
-          src={"/imran.png"}
+          src={user.url}
           alt="profile"
           width={40}
           height={40}

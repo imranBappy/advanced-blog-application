@@ -27,6 +27,7 @@ exports.authGetController = async (req, res, next) => {
 exports.signupController = async (req, res, next) => {
     try {
         let { name, email, password, role } = req.body;
+
         const user = await Auth.findOne({ email: email })
         if (user) {
             return res.status(500).json({ message: 'User Already Exist!' })
@@ -46,6 +47,7 @@ exports.signupController = async (req, res, next) => {
         })
     }
     catch (error) {
+        console.log({ error });
         next(error)
     }
 }
@@ -71,7 +73,8 @@ exports.singinPostController = async (req, res, next) => {
 
         const token = jwt.sign({
             data: { _id: std._id, name: std.name, url: std.url }
-        }, process.env.JWT_SECRET, { expiresIn: '7d' })
+        }, process.env.JWT_SECRET, { expiresIn: '7d' });
+
         res.json({
             isAuthintication: true,
             data: std,
@@ -80,13 +83,33 @@ exports.singinPostController = async (req, res, next) => {
     }
 
     catch (error) {
+        console.log({ error });
         next(error)
     }
 }
 
 exports.updateController = async (req, res, next) => {
     try {
-        const { email, password } = req.body;
+        const { name, email, password, bio, address, website, github } = req.body;
+        const user = await Auth.findById(req.user._id);
+        if (user) {
+            user.name = name || user.name;
+            user.email = email || user.email;
+            user.password = password || user.password;
+            user.bio = bio || user.bio;
+            user.address = address || user.address;
+            user.website = website || user.website;
+            user.github = github || user.github;
+            user.url = req?.file?.path || user.url;
+            await user.save();
+            res.json(user)
+        } else {
+            res.json({
+                isAuthintication: false,
+                message: 'User not found!',
+                error: true
+            })
+        }
     }
     catch (error) {
         next(error)
