@@ -15,7 +15,8 @@ const Profile = () => {
   const { name, email, url, bio, address, website, github }: any =
     useSelector((state: any) => state?.auth?.user) || {};
   const router = useRouter();
-  console.log({ url, email });
+  const DEFAULT_AVATAR_URL =
+    "https://res.cloudinary.com/do5erbtee/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688325761/thumbnail/url-1688325757974-profile-pic.png.jpeg.jpg?_s=public-apps";
 
   return (
     <PrivateRoute>
@@ -31,7 +32,7 @@ const Profile = () => {
 
             <div className=" w-full flex justify-center ">
               <Image
-                src={url}
+                src={url || DEFAULT_AVATAR_URL}
                 className="rounded-full -mt-14 ring-4 ring-blue-900"
                 alt="profile"
                 width={120}

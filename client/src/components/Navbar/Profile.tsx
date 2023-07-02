@@ -1,4 +1,3 @@
-import { userLoggedOut } from "@/features/auth/authSlice";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -8,6 +7,8 @@ const Profile = (props: any) => {
   const [showMenu, setShowMenu] = props.menu;
 
   const user: any = useSelector((state: any) => state?.auth?.user) || {};
+  const DEFAULT_AVATAR_URL =
+    "https://res.cloudinary.com/do5erbtee/image/upload/c_pad,b_auto:predominant,fl_preserve_transparency/v1688325761/thumbnail/url-1688325757974-profile-pic.png.jpeg.jpg?_s=public-apps";
 
   return (
     <>
@@ -15,7 +16,7 @@ const Profile = (props: any) => {
         <Image
           onClick={() => setShowMenu(!showMenu)}
           className="rounded-full ring-4 ring-blue-500 cursor-pointer"
-          src={user.url}
+          src={user.url || DEFAULT_AVATAR_URL}
           alt="profile"
           width={40}
           height={40}
