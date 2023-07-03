@@ -7,7 +7,7 @@ const router = require('express').Router();
 router.get('/', blogsGetController);
 router.get('/:blogId', blogGetController);
 router.post('/', isAuthenticated, upload.single('thumbnail'), blogPostController);
-router.patch('/:blogId', isAuthenticated, blogPatchController);
+router.patch('/:blogId', isAuthenticated, upload.single('thumbnail'), blogPatchController);
 router.delete('/:blogId', isAuthenticated, blogDeleteController);
 
 

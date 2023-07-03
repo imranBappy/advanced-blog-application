@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-// import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import dynamic from "next/dynamic";
 import Thumbnail from "./Thumbnail";
@@ -8,7 +7,6 @@ import {
   useUpdateBlogMutation,
 } from "@/features/blog/blogApi";
 import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
@@ -23,11 +21,14 @@ export default function UpdateBlog(props: any) {
     { data, isLoading: updateLoading, isError: updateError, error },
   ] = useUpdateBlogMutation();
 
-  const [, setThumbnail] = useState("");
-  const [url, setUrl] = useState(null);
+  const [thumbnail, setThumbnail] = useState(null);
+  const [url, setUrl] = useState<string | null>(null);
 
   useEffect(() => {
-    console.log(blog);
+    if (thumbnail) setUrl(URL.createObjectURL(thumbnail));
+  }, [thumbnail]);
+
+  useEffect(() => {
     if (blog && !isError && !isLoading) {
       setTitle(blog.title);
       setContent(blog.content);
@@ -40,15 +41,18 @@ export default function UpdateBlog(props: any) {
       toast.success("Blog successfully Updated!");
       router.push("/");
     }
-  }, [data, updateLoading, updateError, error]);
+  }, [data, updateLoading, updateError, error, isError, router]);
 
   const handlePost = async () => {
     if (!title) toast.error("Title is require");
     if (content.length < 12) toast.error("Content is require");
 
     if (title && content.length > 12) {
-      updateBlog({ body: { title, content }, id: id });
-      // console.log({ body: { title, content }, id: id });
+      const formData = new FormData();
+      formData.append("thumbnail", thumbnail);
+      formData.append("title", title);
+      formData.append("content", content);
+      updateBlog({ body: formData, id: id });
     }
   };
 
@@ -71,20 +75,18 @@ export default function UpdateBlog(props: any) {
           <ReactQuill
             placeholder="Write description"
             theme="snow"
-            name="content"
             value={content}
-            placeholder="Write your blog content here..."
             onChange={setContent}
           />
 
           <div>
             <br />
             <button
-              disabled={isLoading}
+              disabled={updateLoading}
               className="btn-active btn-hover  my-5"
               onClick={handlePost}
             >
-              {isLoading ? "Loading" : "Update"}
+              {updateLoading ? "Loading" : "Update"}
             </button>
           </div>
         </>

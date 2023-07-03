@@ -1,10 +1,8 @@
 import Image from "next/image";
 import React from "react";
 
-
 const SingleBlog = (props: any) => {
   const { title, thumbnail, content } = props.blog;
-  console.log(thumbnail);
 
   return (
     <div>

@@ -73,10 +73,16 @@ exports.blogPatchController = async (req, res, next) => {
     const { blogId } = req.params
     const { title, content } = req.body
     try {
-        let blog = await Blog.findByIdAndUpdate(blogId, {
-            title: title,
-            content: content
-        })
+        let blog = await Blog.findById(blogId);
+        if (!blog) {
+            let error = new Error('404 blog not found')
+            error.status = 404
+            throw error
+        }
+        blog.title = title || blog.title
+        blog.content = content || blog.content
+        blog.thumbnail = req.file?.path || blog.thumbnail
+        await blog.save()
         res.json(blog)
     } catch (error) {
         next(error)

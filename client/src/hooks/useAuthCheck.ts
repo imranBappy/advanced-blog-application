@@ -6,10 +6,10 @@ export default function useAuthCheck() {
     const dispatch = useDispatch()
     const [authCheck, setAuthCheck] = useState(false)
     useEffect(() => {
-        let localAuth = localStorage.getItem("auth")
+        let localAuth:any = localStorage.getItem("auth")
         if (localAuth) {
             localAuth = JSON.parse(localAuth)
-            if (localAuth.accessToken && localAuth.data&& localAuth.isAuthintication) {
+            if (localAuth?.accessToken && localAuth?.data&& localAuth?.isAuthintication) {
                 dispatch(userLoggedIn(localAuth))
             }
         }

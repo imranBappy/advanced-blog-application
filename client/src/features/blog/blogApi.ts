@@ -17,15 +17,19 @@ export const blogApi = apiSlice.injectEndpoints({
         }),
         getBlog: builder.query({
             query: (id) => `/blog/${id}`,
-            providesTags:['Blog']
+            providesTags: (result, error, id) => {
+                return [{type: 'Blog', id:id}]
+            }
         }),
         updateBlog: builder.mutation({
-            query: ({body,id}) => ({
+            query: ({ id,body }) => ({
                 url: `/blog/${id}`,
                 method: 'PATCH',
                 body
             }),
-            invalidatesTags: ['Blogs']
+            invalidatesTags: (result, error, arg) => {
+                return [{type: 'Blog', id: arg.id}]
+            }
         }),
         deleteBlog: builder.mutation({
             query: (id) => ({
@@ -37,4 +41,4 @@ export const blogApi = apiSlice.injectEndpoints({
     })
 })
 
-export const {useDeleteBlogMutation, util:{getRunningQueriesThunk}, useUpdateBlogMutation, usePostBlogMutation, useGetBlogsQuery , useGetBlogQuery}  = blogApi
+export const {useDeleteBlogMutation, useUpdateBlogMutation, usePostBlogMutation, useGetBlogsQuery , useGetBlogQuery}  = blogApi

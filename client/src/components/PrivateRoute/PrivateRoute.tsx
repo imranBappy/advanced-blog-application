@@ -1,9 +1,11 @@
 import useAuth from "@/hooks/useAuth";
 import useAuthCheck from "@/hooks/useAuthCheck";
 import { useRouter } from "next/router";
-import React from "react";
+import React, { ReactElement } from "react";
 
-const PrivateRoute: React.FunctionComponent<any> = (props) => {
+const PrivateRoute: React.FunctionComponent<any> = (
+  props
+): ReactElement | any => {
   const { children } = props;
   const isAuthintication = useAuth();
   const router = useRouter();

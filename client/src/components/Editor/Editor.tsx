@@ -7,18 +7,18 @@ import { useRouter } from "next/router";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
-export default function Editor(props: any) {
+export default function Editor() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState<any>("");
   const [postBlog, { data, isLoading, isError, error }] = usePostBlogMutation();
   const router = useRouter();
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (data || isError) {
-      if (isError) toast.error(error?.data?.message);
+      if (isError) toast.error("There was an error !");
       else {
         toast.success("Blog successfully published!");
         router.push("/");
@@ -38,7 +38,7 @@ export default function Editor(props: any) {
       postBlog(formData);
     }
   };
-  const [url, setUrl] = useState(null);
+  const [url, setUrl] = useState<any | null>(null);
 
   useEffect(() => {
     if (thumbnail) {
@@ -61,9 +61,7 @@ export default function Editor(props: any) {
       <ReactQuill
         placeholder="Write description"
         theme="snow"
-        name="content"
         value={content}
-        placeholder="Write your blog content here..."
         onChange={setContent}
       />
       <div>

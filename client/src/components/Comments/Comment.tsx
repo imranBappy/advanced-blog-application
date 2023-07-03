@@ -8,14 +8,13 @@ const Comment = (props: any) => {
     createdAt,
     user: { name },
   } = props.comment;
-  const options = {
+
+  const data = new Date(createdAt).toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "2-digit",
-  };
-
-  const data = new Date(createdAt).toLocaleDateString("en-US", options);
+  });
   var time = new Date(createdAt).toLocaleTimeString();
   // console.log(props.comment);
 

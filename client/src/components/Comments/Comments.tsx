@@ -21,7 +21,7 @@ const Comments = (props: any) => {
     <>
       <CommentBox postComment={postComment} />
       <div className="mt-5">
-        {comments?.map((comment) => (
+        {comments?.map((comment:any) => (
           <>
             <Comment comment={comment} />
           </>

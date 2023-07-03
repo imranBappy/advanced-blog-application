@@ -29,7 +29,7 @@ const Login = () => {
     formState: { errors },
     watch,
     handleSubmit,
-  } = useForm();
+  }:any = useForm<any>();
   const router = useRouter();
 
   useEffect(() => {

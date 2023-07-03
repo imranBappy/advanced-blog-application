@@ -24,14 +24,14 @@ type UserType = {
 };
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [register, { data, isLoading, isError, error }] =
+  const [register, { data, isLoading, isError, error }]: any =
     useRegisterMutation<UserType>({});
   const {
     register: registerUser,
     formState: { errors },
     watch,
     handleSubmit,
-  } = useForm();
+  }: any = useForm<any>();
 
   const router = useRouter();
   const dispatch = useDispatch();
@@ -72,7 +72,7 @@ const Register = () => {
                 />
               ))}
               <SubmitBtn
-                disabled={isLoading}
+                disabled={false}
                 value={isLoading ? "Loading..." : "Register"}
               />
             </div>
@@ -90,5 +90,3 @@ const Register = () => {
 };
 
 export default Register;
-
-

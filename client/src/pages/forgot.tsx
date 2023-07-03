@@ -16,6 +16,7 @@ const Forgot = () => {
   const onSubmit = (data: any) => {
     console.log(data);
   };
+  const emailError = errors?.email;
   return (
     <>
       <Layout>
@@ -29,16 +30,16 @@ const Forgot = () => {
           </p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="flex flex-wrap -mx-3 mb-6">
-              <InputField
-                error={errors.email}
+              {/* <InputField
+                error={emailError}
                 name="email"
                 label="Email"
                 type="email"
                 placeholder="john@gmail.com"
                 required="Email Address is required"
                 register={register}
-              />
-              <SubmitBtn value="Reset password" />
+              /> */}
+              <SubmitBtn value="Reset password" disabled={false} />
             </div>
           </form>
           <p className="text-sm  text-center text-blue-800">

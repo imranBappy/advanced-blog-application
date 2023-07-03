@@ -11,7 +11,7 @@ export default function Index() {
         <Layout>
           <div className="container">
             <h1 className=" text-2xl font-bold my-6">Create Blog</h1>
-            <Editor state={[value, setValue]} />
+            <Editor />
           </div>
         </Layout>
       </PrivateRoute>

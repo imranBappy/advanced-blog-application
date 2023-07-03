@@ -4,7 +4,12 @@ import { useDashboardGetBlogQuery } from "@/features/dashboard/dashboardApi";
 import Error from "../UI/Error";
 
 const DashboardBlog = () => {
-  const { data: blogs, isError, isLoading, error } = useDashboardGetBlogQuery();
+  const {
+    data: blogs,
+    isError,
+    isLoading,
+    error,
+  } = useDashboardGetBlogQuery({});
   console.log(error, blogs);
 
   let content = null;

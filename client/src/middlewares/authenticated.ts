@@ -2,7 +2,7 @@ import { verifyToken, User } from './auth';
 import { NextApiHandler, NextApiRequest, NextApiResponse } from 'next';
 
 export function withAuth(handler: NextApiHandler) {
-  return async (req: NextApiRequest, res: NextApiResponse) => {
+  return async (req: any, res: NextApiResponse) => {
     const token = req.cookies.token;
 
     if (!token) {

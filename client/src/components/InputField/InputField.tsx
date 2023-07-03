@@ -1,7 +1,7 @@
 import React from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
-const InputField = (props: any) => {
+const InputField = React.forwardRef<HTMLDivElement>((props: any, ref: any) => {
   const {
     showPassword,
     id,
@@ -17,7 +17,7 @@ const InputField = (props: any) => {
   } = props;
   if (type === "password") {
     return (
-      <div className="w-full px-3 mt-2 md:mb-0">
+      <div ref={ref} className="w-full px-3 mt-2 md:mb-0">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="grid-first-name"
@@ -66,25 +66,28 @@ const InputField = (props: any) => {
         )}
       </div>
     );
+  } else {
+    return (
+      <div ref={ref} className="w-full px-3 mt-2 md:mb-0">
+        <label
+          className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+          htmlFor={name}
+        >
+          {label}
+        </label>
+        <input
+          className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          name={name}
+          type={type}
+          {...rest}
+          {...register(name, { required: required })}
+        />
+        {error && (
+          <p className="text-red-500 text-xs italic">{error.message}</p>
+        )}
+      </div>
+    );
   }
-  return (
-    <div className="w-full px-3 mt-2 md:mb-0">
-      <label
-        className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-        htmlFor={name}
-      >
-        {label}
-      </label>
-      <input
-        className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-2 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-        name={name}
-        type={type}
-        {...rest}
-        {...register(name, { required: required })}
-      />
-      {error && <p className="text-red-500 text-xs italic">{error.message}</p>}
-    </div>
-  );
-};
-
+});
+InputField.displayName = "InputField";
 export default InputField;

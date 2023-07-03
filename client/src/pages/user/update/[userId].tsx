@@ -27,6 +27,10 @@ const Profile = () => {
   const [editMutation, { isLoading, isError, error, isSuccess }] =
     useUpdateMutation();
   const router = useRouter();
+  const [fake, setFake] = useState([]);
+  useEffect(() => {
+    setFake(JSON.parse(JSON.stringify(InputFiledData)));
+  }, []);
 
   useEffect(() => {
     if (image) {
@@ -75,7 +79,7 @@ const Profile = () => {
           </div>
           <div className="card">
             <div className="flex flex-wrap -mx-3 mb-6">
-              {InputFiledData.map((inputField) => (
+              {fake.map((inputField) => (
                 <InputField
                   errors={errors}
                   error={errors[inputField.name]}
