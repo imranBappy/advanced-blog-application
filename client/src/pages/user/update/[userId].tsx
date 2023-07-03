@@ -1,17 +1,10 @@
 import Layout from "@/components/Layout/Layout";
-import Image from "next/image";
 import React from "react";
 import { useSelector } from "react-redux";
-import { IoLocationSharp } from "react-icons/io5";
-import { MdEmail } from "react-icons/md";
-import { FaExternalLinkAlt } from "react-icons/fa";
-import { AiOutlineGithub } from "react-icons/ai";
-import DashboardBlog from "@/components/Blog/DashboardBlog";
 import PrivateRoute from "@/components/PrivateRoute/PrivateRoute";
 import InputField from "@/components/InputField/InputField";
 import { useForm } from "react-hook-form";
 import { useUpdateMutation } from "@/features/auth/authApi";
-import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import InputFiledData from "../../../data/editProfileInputField.json";
@@ -49,7 +42,7 @@ const Profile = () => {
     watch,
     handleSubmit,
     reset,
-  } = useForm({
+  }:any = useForm({
     defaultValues: { name, email },
   });
 
@@ -79,12 +72,12 @@ const Profile = () => {
           </div>
           <div className="card">
             <div className="flex flex-wrap -mx-3 mb-6">
-              {fake.map((inputField) => (
+              {fake.map((inputField:any) => (
                 <InputField
                   errors={errors}
-                  error={errors[inputField.name]}
-                  key={inputField.id}
-                  {...register(inputField.name, { required: true })}
+                  error={errors[inputField?.name]}
+                  key={inputField?.id}
+                  {...register(inputField?.name, { required: true })}
                   register={register}
                   {...inputField}
                   watch={watch}

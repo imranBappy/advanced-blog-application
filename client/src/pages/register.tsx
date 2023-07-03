@@ -22,10 +22,12 @@ type UserType = {
   isLoading: Boolean;
   isError: Boolean;
 };
+
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [register, { data, isLoading, isError, error }]: any =
     useRegisterMutation<UserType>({});
+
   const {
     register: registerUser,
     formState: { errors },

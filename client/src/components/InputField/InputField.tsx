@@ -1,7 +1,22 @@
 import React from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-
-const InputField = React.forwardRef<HTMLDivElement>((props: any, ref: any) => {
+interface InputType {
+  // Define the expected prop types of your component
+  watch: any;
+  id: number;
+  name: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  required: string;
+  errors: any;
+  error: any;
+  key: number;
+  showPassword: boolean;
+  setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
+  register: any;
+}
+const InputField = (props: InputType, ref: any) => {
   const {
     showPassword,
     id,
@@ -14,7 +29,7 @@ const InputField = React.forwardRef<HTMLDivElement>((props: any, ref: any) => {
     error,
     watch,
     ...rest
-  } = props;
+  }: any = props;
   if (type === "password") {
     return (
       <div ref={ref} className="w-full px-3 mt-2 md:mb-0">
@@ -88,6 +103,6 @@ const InputField = React.forwardRef<HTMLDivElement>((props: any, ref: any) => {
       </div>
     );
   }
-});
-InputField.displayName = "InputField";
+};
+
 export default InputField;

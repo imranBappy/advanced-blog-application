@@ -48,7 +48,7 @@ export default function UpdateBlog(props: any) {
     if (content.length < 12) toast.error("Content is require");
 
     if (title && content.length > 12) {
-      const formData = new FormData();
+      const formData:any = new FormData();
       formData.append("thumbnail", thumbnail);
       formData.append("title", title);
       formData.append("content", content);
