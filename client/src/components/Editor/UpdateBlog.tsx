@@ -21,8 +21,8 @@ export default function UpdateBlog(props: any) {
     { data, isLoading: updateLoading, isError: updateError, error },
   ] = useUpdateBlogMutation();
 
-  const [thumbnail, setThumbnail] = useState(null);
-  const [url, setUrl] = useState<string | null>(null);
+  const [thumbnail, setThumbnail] = useState<any>(null);
+  const [url, setUrl] = useState<any>(null);
 
   useEffect(() => {
     if (thumbnail) setUrl(URL.createObjectURL(thumbnail));
@@ -48,7 +48,7 @@ export default function UpdateBlog(props: any) {
     if (content.length < 12) toast.error("Content is require");
 
     if (title && content.length > 12) {
-      const formData:any = new FormData();
+      const formData: any = new FormData();
       formData.append("thumbnail", thumbnail);
       formData.append("title", title);
       formData.append("content", content);
