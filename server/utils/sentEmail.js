@@ -13,7 +13,7 @@ async function sendEmail(to, name, password) {
     var mailOptions = {
         from: 'imranbappy.official@gmail.com',
         to: to,
-        subject: 'Approved You Application from Return Zero University!',
+        subject: 'Created You Account!',
         html: `
             <!doctype html>
             <html ⚡4email>
@@ -25,8 +25,7 @@ async function sendEmail(to, name, password) {
             </head>
             <body>
                 <h1>Welcome ${name}!</h1>
-                <h4 style="color:green">You admission application has successfully approved </h4>
-                <p>You Account Password : ${password}</p>
+                <h4 style="color:green">You account successfully created! </h4>
             </body>
             </html>
     `
