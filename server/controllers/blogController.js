@@ -58,11 +58,13 @@ exports.blogGetController = async (req, res, next) => {
             .populate({
                 path: 'comments',
                 select: 'body createdAt',
+                options: { sort: { createdAt: -1 } },
                 populate: {
                     path: 'user',
                     select: 'name url'
                 }
             })
+        console.log(blog);
         res.json(blog)
     } catch (error) {
         next(error)
