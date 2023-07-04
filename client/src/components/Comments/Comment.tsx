@@ -6,7 +6,7 @@ const Comment = (props: any) => {
   const {
     body,
     createdAt,
-    user: { name },
+    user: { name, url },
   } = props.comment;
 
   const data = new Date(createdAt).toLocaleDateString("en-US", {
@@ -24,7 +24,7 @@ const Comment = (props: any) => {
         <Link href={"#"}>
           <Image
             className="rounded-full shadow-xl ring-2 ring-blue-500 cursor-pointer"
-            src={"/imran.png"}
+            src={url || process.env.DEFAULT_AVATAR_URL}
             alt="profile"
             width={30}
             height={30}
