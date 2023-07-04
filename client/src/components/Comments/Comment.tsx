@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
+import moment from "moment/moment";
 
 const Comment = (props: any) => {
   const {
@@ -39,7 +40,7 @@ const Comment = (props: any) => {
             </h5>
           </Link>
           &nbsp; <b>.</b> &nbsp;
-          <span className=" text-sm">{`${data} - ${time}`}</span>
+          <span className=" text-sm">{`${moment(createdAt).fromNow()}`}</span>
         </div>
         {body}
       </div>

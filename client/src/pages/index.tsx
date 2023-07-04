@@ -5,7 +5,7 @@ import BlogLoader from "@/components/UI/loaders/BlogLoader";
 import { useGetBlogsQuery } from "@/features/blog/blogApi";
 
 export default function Home() {
-  const { data: blogs, isError, isLoading, error } = useGetBlogsQuery({});
+  const { data: blogs, isError, isLoading } = useGetBlogsQuery({});
   let content = null;
 
   if (isLoading)

@@ -1,11 +1,10 @@
+import moment from "moment/moment";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-const url = "http://localhost:5000";
 
 const Blog = (props: any) => {
-  const { title, thumbnail, content, author, _id } = props.blog;
-  console.log(thumbnail, author);
+  const { title, thumbnail, content, author, _id, createdAt } = props.blog;
 
   return (
     <div className="card-blog mb-5">
@@ -36,10 +35,9 @@ const Blog = (props: any) => {
               />
             </div>
             <span>
-              {" "}
-              <strong> {author.name}</strong> |{" "}
+              <strong> {author.name}</strong> |
             </span>
-            <div> March 31, 2023</div>
+            <div> {moment(createdAt).fromNow()}</div>
           </div>
         </div>
       </Link>

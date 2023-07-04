@@ -22,9 +22,17 @@ const getDocHeight = () => {
 
 export default function Blog() {
   const router = useRouter();
+
   const { id } = router.query;
   const [progress, setProgress] = useState(0);
-  const { data: blog, isError, isLoading } = useGetBlogQuery(id);
+
+  const {
+    data: blog,
+    isError,
+    isLoading,
+  } = useGetBlogQuery(id, {
+    skip: !id,
+  });
   let content = null;
   if (isLoading)
     content = (

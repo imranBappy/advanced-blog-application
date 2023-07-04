@@ -10,7 +10,7 @@ export const apiSlice = createApi({
     reducerPath: "api",
     
     baseQuery: fetchBaseQuery({
-        baseUrl: baseUrl,
+        baseUrl: 'http://localhost:5000',
         prepareHeaders: (headers, { getState, endpoint }):any => {
             let token: any = getState()
             token = token.auth.accessToken;
@@ -21,7 +21,7 @@ export const apiSlice = createApi({
         },
     }),
     tagTypes: ['Blogs','Blog','DashboardBlogs'],
-    endpoints: (builder) => ({}),
+    endpoints: (builder)=> ({}),
 })
 
 

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 
 const Comments = (props: any) => {
   // const { body, user } = props.blog.comments || {};
-  const { comments } = props.blog || {};
+  const { comments = [] } = props.blog || {};
   const [postComment, { data, isLoading, isError, error }] =
     usePostCommentMutation();
   // console.log(body, user);
@@ -21,10 +21,8 @@ const Comments = (props: any) => {
     <>
       <CommentBox postComment={postComment} />
       <div className="mt-5">
-        {comments?.map((comment:any) => (
-          <>
-            <Comment comment={comment} />
-          </>
+        {comments?.map((comment: any) => (
+          <Comment key={comment._id} comment={comment} />
         ))}
       </div>
     </>
