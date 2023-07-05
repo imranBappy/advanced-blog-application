@@ -9,7 +9,7 @@ First, run the development server:
 cd server
 npm install
 # then
-npm start
+npm run dev
 
 # and
 
@@ -20,17 +20,6 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-```bash
-# Admin
-    Email: admin@gmail.com
-    Password: pass123
-
-# User
-    Email: imran@gmail.com
-    Password: pass123
-
-```
 
 ## Used Technologies
 
