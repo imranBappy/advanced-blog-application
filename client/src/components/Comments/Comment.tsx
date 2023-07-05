@@ -10,14 +10,6 @@ const Comment = (props: any) => {
     user: { name, url },
   } = props.comment;
 
-  const data = new Date(createdAt).toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "2-digit",
-  });
-  var time = new Date(createdAt).toLocaleTimeString();
-  // console.log(props.comment);
 
   return (
     <div className="flex gap-2">

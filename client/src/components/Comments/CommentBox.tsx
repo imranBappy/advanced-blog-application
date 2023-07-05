@@ -28,7 +28,7 @@ const CommentBox = (props: any) => {
         <Link href={"#"}>
           <Image
             className="rounded-full shadow-xl ring-2 ring-blue-500 cursor-pointer"
-            src={"/imran.png"}
+            src={props.url}
             alt="profile"
             width={30}
             height={30}

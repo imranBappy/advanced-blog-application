@@ -1,3 +1,4 @@
+import store from '@/app/store';
 import { apiSlice } from '../api/apiSlice';
 
 
@@ -19,7 +20,7 @@ export const blogApi = apiSlice.injectEndpoints({
             query: ({page}:any) => `/blog?page=${page}`,
             async onQueryStarted({ page }, { dispatch, queryFulfilled }) { 
                 try {
-                    const result = await queryFulfilled
+                    const result = await queryFulfilled;
                     if (result.data.blogs.length > 0) { 
                         dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
                             draft.blogs.push(...result.data.blogs);
@@ -50,7 +51,8 @@ export const blogApi = apiSlice.injectEndpoints({
                 method: 'DELETE'
             }),
             invalidatesTags: ['DashboardBlogs'],
-        })
+        }),
+         
     })
 })
 

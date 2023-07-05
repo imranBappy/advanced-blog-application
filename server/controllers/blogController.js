@@ -44,7 +44,6 @@ exports.blogsGetController = async (req, res, next) => {
             ...blog._doc,
             content: truncate(blog._doc.content)
         }))
-        console.log(dataLength.length);
         res.json({ blogs, length: dataLength.length })
     } catch (error) {
         next(error)
