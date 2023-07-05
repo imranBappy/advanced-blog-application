@@ -15,6 +15,19 @@ export const blogApi = apiSlice.injectEndpoints({
             query: () => `/blog`,
             providesTags:['Blogs']
         }),
+        getMoreBlogs: builder.query({
+            query: ({page}:any) => `/blog?page=${page}`,
+            async onQueryStarted({ page }, { dispatch, queryFulfilled }) { 
+                try {
+                    const result = await queryFulfilled
+                    if (result.data.blogs.length > 0) { 
+                        dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
+                            draft.blogs.push(...result.data.blogs);
+                        }))
+                    }
+                } catch (error) {}
+            },
+        }),
         getBlog: builder.query({
             query: (id) => `/blog/${id}`,
             providesTags: (result, error, id) => {

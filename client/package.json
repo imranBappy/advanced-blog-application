@@ -24,6 +24,7 @@
     "react-dom": "18.2.0",
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-quill": "^2.0.0",
     "react-redux": "^8.0.5",
     "react-text-truncate": "^0.19.0",

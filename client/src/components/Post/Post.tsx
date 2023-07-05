@@ -13,7 +13,7 @@ const Post = (props: any) => {
   useEffect(() => {
     if (isError) toast.error("There was an error");
     if (data) {
-      toast.success("Successfully Logedin!");
+      toast.success("Successfully Deleted!");
     }
   }, [data, isLoading, isError, error]);
   const handleDelete = () => {

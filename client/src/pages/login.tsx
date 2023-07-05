@@ -29,7 +29,7 @@ const Login = () => {
     formState: { errors },
     watch,
     handleSubmit,
-  }:any = useForm<any>();
+  }: any = useForm<any>();
   const router = useRouter();
 
   useEffect(() => {
@@ -49,9 +49,7 @@ const Login = () => {
     <>
       <Layout>
         <div className="shadow-md p-10 w-full mx-auto max-w-[500px] my-40">
-          <h1 className="py-5 text font-semibold text-xl uppercase">
-            Register
-          </h1>
+          <h1 className="py-5 text font-semibold text-xl uppercase">Login</h1>
           <form onSubmit={handleSubmit(submit)}>
             <div className="flex flex-wrap -mx-3 mb-6">
               {registerInputFiled.map((inputField) => (

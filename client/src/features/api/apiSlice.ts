@@ -9,7 +9,7 @@ export const apiSlice = createApi({
     reducerPath: "api",
     
     baseQuery: fetchBaseQuery({
-        baseUrl: baseUrl,
+        baseUrl: process.env.NODE_ENV ==='production' ? baseUrl : 'http://localhost:5000' ,
         prepareHeaders: (headers, { getState, endpoint }):any => {
             let token: any = getState()
             token = token.auth.accessToken;

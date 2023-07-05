@@ -39,7 +39,6 @@ export const authApi = apiSlice.injectEndpoints({
                     const result = await queryFulfilled;
                     localStorage.setItem("auth", JSON.stringify(result.data));
                     dispatch(userLoggedIn(result.data));
-                     toast.success('Successfully Logedin!')
                 } catch (error:any) {
                     toast.error(error.error.data.error)
                 }

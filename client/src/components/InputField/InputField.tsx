@@ -16,7 +16,7 @@ interface InputType {
   setShowPassword: React.Dispatch<React.SetStateAction<boolean>>;
   register: any;
 }
-const InputField = (props: InputType, ref: any) => {
+const InputField = (props: InputType) => {
   const {
     showPassword,
     id,
@@ -32,7 +32,7 @@ const InputField = (props: InputType, ref: any) => {
   }: any = props;
   if (type === "password") {
     return (
-      <div ref={ref} className="w-full px-3 mt-2 md:mb-0">
+      <div className="w-full px-3 mt-2 md:mb-0">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor="grid-first-name"
@@ -83,7 +83,7 @@ const InputField = (props: InputType, ref: any) => {
     );
   } else {
     return (
-      <div ref={ref} className="w-full px-3 mt-2 md:mb-0">
+      <div className="w-full px-3 mt-2 md:mb-0">
         <label
           className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
           htmlFor={name}

@@ -34,18 +34,18 @@ exports.blogsGetController = async (req, res, next) => {
     // let { order, filterObj } = generateFilterObb(filter.toLowerCase())
     let order = 1;
     try {
+        let dataLength = await Blog.find({})
         let blogs = await Blog.find({})
             .populate('author', '_id name url')
             .sort(order === 1 ? '-createdAt' : 'createdAt')
             .skip((itemPerPage * currentPage) - itemPerPage)
             .limit(itemPerPage)
-
         blogs = blogs.map(blog => ({
             ...blog._doc,
             content: truncate(blog._doc.content)
         }))
-        res.json(blogs)
-
+        console.log(dataLength.length);
+        res.json({ blogs, length: dataLength.length })
     } catch (error) {
         next(error)
     }
@@ -54,6 +54,7 @@ exports.blogsGetController = async (req, res, next) => {
 exports.blogGetController = async (req, res, next) => {
     const { blogId } = req.params
     try {
+
         let blog = await Blog.findById(blogId)
             .populate({
                 path: 'comments',
@@ -64,7 +65,6 @@ exports.blogGetController = async (req, res, next) => {
                     select: 'name url'
                 }
             })
-        console.log(blog);
         res.json(blog)
     } catch (error) {
         next(error)

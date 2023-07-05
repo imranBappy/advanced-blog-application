@@ -5,6 +5,7 @@ import Navbar from "../Navbar/Navbar";
 
 export default function Layout(props: any) {
   const { children } = props;
+  // console.log(children.props.id); //index-page
 
   return (
     <>
@@ -17,7 +18,7 @@ export default function Layout(props: any) {
       <Navbar />
 
       <main className=" mt-20">{children}</main>
-      <Footer />
+      {/* {children?.props?.id !== "index-page" ? <Footer /> : null} */}
     </>
   );
 }
