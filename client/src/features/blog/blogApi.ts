@@ -1,5 +1,6 @@
 import store from '@/app/store';
 import { apiSlice } from '../api/apiSlice';
+import { dashboarApi } from '../dashboard/dashboardApi';
 
 
 export const blogApi = apiSlice.injectEndpoints({
@@ -10,7 +11,21 @@ export const blogApi = apiSlice.injectEndpoints({
                 method: 'POST',
                 body
             }),
-            invalidatesTags: ['Blogs']
+            async onQueryStarted(body, { dispatch, queryFulfilled }) { 
+                try {
+                    const result = await queryFulfilled;
+
+                    // getBlogs  cash passimstic update
+                    dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
+                        draft.blogs.unshift(result.data);
+                    }));
+
+                    // dashboardGetBlog cash passimstic update
+                    dispatch(dashboarApi.util.updateQueryData('dashboardGetBlog', {}, (draft) => {
+                        draft.unshift(result.data);
+                    }))
+                } catch (error) {}
+            },
         }),
         getBlogs: builder.query({
             query: () => `/blog`,
@@ -50,7 +65,26 @@ export const blogApi = apiSlice.injectEndpoints({
                 url: `/blog/${id}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: ['DashboardBlogs'],
+            async onQueryStarted(id, { dispatch, queryFulfilled }) { 
+                // cash passimstic update
+                try {
+                    const result = await queryFulfilled;
+
+                    // update dashboardGetBlog cash
+                    dispatch(dashboarApi.util.updateQueryData('dashboardGetBlog', {}, (draft) => { 
+                        const index = draft.findIndex((blog: any) => blog._id === result.data._id);
+                        draft.splice(index, 1);
+                    }))
+
+                    //update getBlogs cash
+                    dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
+                        const index = draft.blogs.findIndex((blog:any) => blog._id === result.data._id);
+                        draft.blogs.splice(index, 1);
+                    }))
+                    
+
+                } catch (error) {}
+            },
         }),
          
     })

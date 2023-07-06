@@ -20,7 +20,21 @@ exports.blogPostController = async (req, res, next) => {
             { user: req.user._id },
             { $push: { 'blogs': createdBlog._id } }
         )
-        res.json({ blog })
+        res.json({
+            author: {
+                _id: req.user._id,
+                name: req.user.name,
+                url: req.user.url
+            },
+            content: truncate(blog._doc.content),
+            _id: blog._doc._id,
+            title: blog._doc.title,
+            thumbnail: blog._doc.thumbnail,
+            createdAt: blog._doc.createdAt,
+            likes: [],
+            comments: [],
+            createdAt: blog._doc.createdAt,
+        })
     } catch (e) {
         next(e)
     }
@@ -36,6 +50,7 @@ exports.blogsGetController = async (req, res, next) => {
     try {
         let dataLength = await Blog.find({})
         let blogs = await Blog.find({})
+            .select('-__v -updatedAt')
             .populate('author', '_id name url')
             .sort(order === 1 ? '-createdAt' : 'createdAt')
             .skip((itemPerPage * currentPage) - itemPerPage)
@@ -107,9 +122,7 @@ exports.blogDeleteController = async (req, res, next) => {
         await Comment.deleteMany({
             blog: blog
         })
-        res.json({
-            message: "Blog Successfully deleted!"
-        })
+        res.json(blog)
     } catch (error) {
         next(error)
     }
