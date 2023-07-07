@@ -1,7 +1,5 @@
-import store from '@/app/store';
 import { apiSlice } from '../api/apiSlice';
 import { dashboarApi } from '../dashboard/dashboardApi';
-
 
 export const blogApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
@@ -56,9 +54,32 @@ export const blogApi = apiSlice.injectEndpoints({
                 method: 'PATCH',
                 body
             }),
-            invalidatesTags: (result, error, arg) => {
-                return [{type: 'Blog', id: arg.id}]
-            }
+          async onQueryStarted({ id,body }, { dispatch, queryFulfilled }) { 
+                // cash passimstic update
+                try {
+                    const result = await queryFulfilled;
+
+                    // update dashboardGetBlog cash
+                    dispatch(dashboarApi.util.updateQueryData('dashboardGetBlog', {}, (draft) => { 
+                        const index = draft.findIndex((blog: any) => blog._id === result.data._id);
+                        draft[index] = result.data;
+                    }))
+
+                    //update getBlogs cash
+                    dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
+                        const index = draft.blogs.findIndex((blog:any) => blog._id === result.data._id);
+                        draft.blogs[index] = result.data;
+                    }))
+                    
+                    dispatch(blogApi.util.updateQueryData('getBlog', id, (draft) => {
+            
+                        const {title, content, thumbnail} = result.data;
+                        draft.title =title;
+                        draft.content = content;
+                        draft.thumbnail = thumbnail;
+                    }))
+                } catch (error) {}
+            },
         }),
         deleteBlog: builder.mutation({
             query: (id) => ({

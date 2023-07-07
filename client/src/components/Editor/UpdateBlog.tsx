@@ -19,7 +19,7 @@ export default function UpdateBlog(props: any) {
   const [
     updateBlog,
     { data, isLoading: updateLoading, isError: updateError, error },
-  ] = useUpdateBlogMutation();
+  ] = useUpdateBlogMutation({});
 
   const [thumbnail, setThumbnail] = useState<any>(null);
   const [url, setUrl] = useState<any>(null);

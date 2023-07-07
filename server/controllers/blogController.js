@@ -95,11 +95,25 @@ exports.blogPatchController = async (req, res, next) => {
             error.status = 404
             throw error
         }
-        blog.title = title || blog.title
-        blog.content = content || blog.content
-        blog.thumbnail = req.file?.path || blog.thumbnail
-        await blog.save()
-        res.json(blog)
+        blog.title = title || blog.title;
+        blog.content = content || blog.content;
+        blog.thumbnail = req.file?.path || blog.thumbnail;
+        await blog.save();
+        res.json({
+            author: {
+                _id: req.user._id,
+                name: req.user.name,
+                url: req.user.url
+            },
+            content: truncate(blog._doc.content),
+            _id: blog._doc._id,
+            title: blog._doc.title,
+            thumbnail: blog._doc.thumbnail,
+            createdAt: blog._doc.createdAt,
+            likes: [],
+            comments: [],
+            createdAt: blog._doc.createdAt,
+        })
     } catch (error) {
         next(error)
     }
