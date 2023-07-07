@@ -29,10 +29,10 @@ const Navbar = () => {
           <div className="h-16 flex items-center">
             <Link href={`/`}>
               <Image
-                src="/logo.svg"
+                src="/logo.png"
                 alt="Next.js Logo"
-                width={80}
-                height={50}
+                height={80}
+                width={150}
               />
             </Link>
           </div>
