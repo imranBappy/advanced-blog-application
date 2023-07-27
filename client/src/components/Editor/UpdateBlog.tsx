@@ -8,6 +8,7 @@ import {
 } from "@/features/blog/blogApi";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
+import findImageId from "@/utils/findImageId";
 
 const ReactQuill = dynamic(import("react-quill"), { ssr: false });
 export default function UpdateBlog(props: any) {
@@ -22,6 +23,7 @@ export default function UpdateBlog(props: any) {
   ] = useUpdateBlogMutation({});
 
   const [thumbnail, setThumbnail] = useState<any>(null);
+  const [prevImage, setPrevImage] = useState<any>(null);
   const [url, setUrl] = useState<any>(null);
 
   useEffect(() => {
@@ -32,7 +34,10 @@ export default function UpdateBlog(props: any) {
     if (blog && !isError && !isLoading) {
       setTitle(blog.title);
       setContent(blog.content);
-      if (blog.thumbnail) setUrl(`${blog.thumbnail}`);
+      if (blog.thumbnail) {
+        setUrl(`${blog.thumbnail}`);
+        setPrevImage(blog.thumbnail);
+      }
     }
   }, [blog, isError, isLoading]);
   useEffect(() => {
@@ -49,9 +54,13 @@ export default function UpdateBlog(props: any) {
 
     if (title && content.length > 12) {
       const formData: any = new FormData();
-      formData.append("thumbnail", thumbnail);
       formData.append("title", title);
       formData.append("content", content);
+      if (thumbnail) {
+        const image_id = findImageId(prevImage);
+        formData.append("thumbnail", thumbnail);
+        formData.append("media_id", image_id);
+      }
       updateBlog({ body: formData, id: id });
     }
   };

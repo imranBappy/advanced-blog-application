@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-// mongodb+srv://imrans-todo:vBMHZcYyOIJDMJW6@cluster0.qxeleyw.mongodb.net/blog
 const connectDB = async () => {
     try {
         mongoose.set('strictQuery', true)

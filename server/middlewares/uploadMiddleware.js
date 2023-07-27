@@ -13,7 +13,7 @@ const storage = new CloudinaryStorage({
     params: {
         folder: 'thumbnail',
         allowed_formats: ['jpg', 'jpeg', 'png', 'gif'],
-        
+
         format: async (req, file,) => {
             if (!file || !file.mimetype.startsWith('image/')) {
                 return new Error('Only image files are allowed!');
@@ -21,49 +21,11 @@ const storage = new CloudinaryStorage({
             return 'jpeg';
         }, // supports promises as well
         public_id: (req, file) => {
-            return `${file.fieldname}-${Date.now()}-${file.originalname}.jpeg`
+            const fileName = `${file.fieldname}-${Date.now()}-${file.originalname.split('.').slice(0, -1).join('-').split(' ').join('-')}`
+            console.log(fileName);
+            return fileName
         },
     },
 });
 
 module.exports = multer({ storage: storage });
-
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-
-//         cb(null, UPLOAD_FOLDER)
-//     },
-//     filename: (req, file, cb) => {
-//         const exName = path.extname(file.originalname);
-//         const fileName = file.originalname
-//             .replace(exName, '')
-//             .toLowerCase()
-//             .split(" ")
-//             .join('-') + Date.now();
-//         cb(null, fileName + exName);
-//     }
-// })
-
-// const upload = multer({
-//     storage: storage,
-//     limits: {
-//         fileSize: (1024 * 1024) * 10 // mb
-//     },
-//     fileFilter: (req, file, cb) => {
-//         if (
-//             file.mimetype === 'image/png' ||
-//             file.mimetype === 'image/jpeg' ||
-//             file.mimetype === 'image/jpg' ||
-//             file.mimetype === 'application/pdf'
-//         ) {
-//             cb(null, true)
-//             // const filePath = __dirname + "\\public\\uploads\\" + file.originalname;
-//             // const filePath = "D:/web/blog-assessment/server/public/uploads/" + file.originalname;
-//             // uploadImage(filePath);
-//         } else {
-//             cb(new Error("Only .jpeg, .jpg, .png, .pdf formet allowed!"))
-//         }
-//     }
-// })
-
-// module.exports = upload;

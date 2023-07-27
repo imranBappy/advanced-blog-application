@@ -115,6 +115,7 @@ exports.blogPatchController = async (req, res, next) => {
             createdAt: blog._doc.createdAt,
         })
     } catch (error) {
+        console.log(111111, { error });
         next(error)
     }
 }
