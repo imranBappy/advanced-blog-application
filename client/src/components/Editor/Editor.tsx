@@ -77,7 +77,7 @@ export default function Editor() {
     "background",
   ];
 
-  const handleProcedureContentChange = (content) => {
+  const handleProcedureContentChange = (content: any) => {
     setContent(content);
   };
 
