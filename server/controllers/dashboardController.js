@@ -4,7 +4,7 @@ const Blog = require('../models/Blog')
 
 exports.dashboardBlogsGetController = async (req, res, next) => {
     let currentPage = parseInt(req.query.page) || 1
-    let itemPerPage = 10
+    let itemPerPage = 5
     let order = 1;
     if (!req.user._id) {
         let error = new Error('User Unauthenticated')
@@ -26,7 +26,9 @@ exports.dashboardBlogsGetController = async (req, res, next) => {
             .skip((itemPerPage * currentPage) - itemPerPage)
             .limit(itemPerPage)
 
-        res.json(blogs)
+        let blog = await Blog.find(user.role === 'Admin' ? {} : { author: req.user._id })
+
+        res.json({ blogs, length: blog.length })
 
     } catch (error) {
         next(error)

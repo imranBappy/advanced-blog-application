@@ -4,7 +4,7 @@ import { apiSlice } from '../api/apiSlice';
 export const dashboarApi = apiSlice.injectEndpoints({
     endpoints: (builder) => ({
         dashboardGetBlog: builder.query({
-            query: () => `/dashboard/blogs`,
+            query: ({page}) => `/dashboard/blogs?page=${page}`,
             providesTags:['DashboardBlogs']
         })
     })
