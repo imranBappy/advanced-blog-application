@@ -72,7 +72,7 @@ export default function Blog() {
             waitingTime={300}
           />
         </div>
-        <div className="blog-container">
+        <div className="blog-container sm:px-3">
           {content}
           <hr />
           <Comments blog={blog} />

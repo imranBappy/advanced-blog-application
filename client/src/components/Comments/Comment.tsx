@@ -21,6 +21,10 @@ const Comment = (props: any) => {
             alt="profile"
             width={30}
             height={30}
+            style={{
+              width:30,
+              height:30
+            }}
           />
         </Link>
       </div>

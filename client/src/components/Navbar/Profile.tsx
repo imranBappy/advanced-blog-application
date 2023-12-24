@@ -16,10 +16,14 @@ const Profile = (props: any) => {
         <Image
           onClick={() => setShowMenu(!showMenu)}
           className="rounded-full ring-4 ring-blue-500 cursor-pointer"
-          src={user.url || DEFAULT_AVATAR_URL}
+          src={user.url || '/default.png'}
           alt="profile"
           width={40}
           height={40}
+          style={{
+            width:"40px",
+            height:"40px"
+          }}
         />
       </div>
       {showMenu && (

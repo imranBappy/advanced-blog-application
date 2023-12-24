@@ -16,7 +16,10 @@ const Blog = (props: any) => {
               src={`${thumbnail}`}
               alt="Next.js Logo"
               width={800}
-              height={500}
+              height={300}
+              style={{
+                height:400
+              }}
             />
           </div>
         )}
@@ -28,10 +31,14 @@ const Blog = (props: any) => {
             <div>
               <Image
                 className="rounded-full shadow-xl ring-2 ring-blue-500 cursor-pointer"
-                src={author.url}
+                src={author.url || '/default.png'}
                 alt="Next.js Logo"
                 width={40}
                 height={40}
+                style={{
+                  width:"40px",
+                  height:"40px"
+                }}
               />
             </div>
             <span>

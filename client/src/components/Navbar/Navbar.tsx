@@ -24,7 +24,7 @@ const Navbar = () => {
   };
   return (
     <>
-      <nav className=" z-50 h-16 border-b bg-white ring  ring-blue-500 top-0 drop-shadow-md fixed w-full">
+      <nav className=" z-50  sm:px-3 h-16 border-b bg-white ring  ring-blue-500 top-0 drop-shadow-md fixed w-full">
         <div className="sm:container mx-auto flex justify-between ">
           <div className="h-16 flex items-center">
             <Link href={`/`}>
@@ -33,6 +33,7 @@ const Navbar = () => {
                 alt="Next.js Logo"
                 height={80}
                 width={150}
+                
               />
             </Link>
           </div>

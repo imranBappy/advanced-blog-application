@@ -32,11 +32,17 @@ const Profile = () => {
 
             <div className=" w-full flex justify-center ">
               <Image
-                src={url || DEFAULT_AVATAR_URL}
+                src={url || '/default.png'}
                 className="rounded-full -mt-14 ring-4 ring-blue-900"
                 alt="profile"
                 width={120}
                 height={120}
+                
+                style={{
+                  width:120,
+                  height:120,
+                  objectFit:"cover"
+                }}
               />
             </div>
 

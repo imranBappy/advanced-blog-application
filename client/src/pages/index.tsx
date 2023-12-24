@@ -56,14 +56,14 @@ export default function Home() {
         endMessage={<p className="text-center py-3">There are not blog</p>}
         loader={
           <Layout>
-            <div id="index-page" className="blog-container mt-24">
+            <div id="index-page" className="blog-container sm:px-3 mt-24">
               {loaddingComponents}
             </div>
           </Layout>
         }
       >
         <Layout>
-          <div id="index-page" className="blog-container mt-24">
+          <div id="index-page" className="blog-container sm:px-3 mt-24">
             {content}
           </div>
         </Layout>

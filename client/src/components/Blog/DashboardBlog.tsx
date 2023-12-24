@@ -7,7 +7,6 @@ const DashboardBlog = () => {
   const [page, setPage] = React.useState(1);
   const { data, isError, isLoading } = useDashboardGetBlogQuery({ page: page });
   const { blogs, length } = data || { blogs: [], length: 0 };
-
   let content = null;
   if (isLoading)
     content = (
@@ -17,7 +16,7 @@ const DashboardBlog = () => {
     );
   if (isError) content = <Error />;
   if (data)
-    content = data.map((blog: any) => (
+    content = blogs.map((blog: any) => (
       <Post key={blog._id} _id={blog._id} title={blog.title} />
     ));
 
