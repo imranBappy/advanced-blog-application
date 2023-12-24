@@ -13,11 +13,14 @@ export default function Home() {
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
   const dispatch: any = useDispatch();
+
   useEffect(() => {
     if (blogs) {
       if (blogs.length === length && length > 1) setHasMore(false);
     }
   }, [blogs, length]);
+
+  console.log({ blogs });
 
   useEffect(() => {
     if (page > 1) {
@@ -62,7 +65,6 @@ export default function Home() {
         <Layout>
           <div id="index-page" className="blog-container mt-24">
             {content}
-            {/* {content} */}
           </div>
         </Layout>
       </InfiniteScroll>

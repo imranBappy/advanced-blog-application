@@ -7,7 +7,9 @@ export const apiSlice = createApi({
     reducerPath: "api",
     
     baseQuery: fetchBaseQuery({
-        baseUrl: process.env.NODE_ENV ==='production' ? baseUrl : 'http://localhost:5000' ,
+        // baseUrl: process.env.NODE_ENV ==='production' ? baseUrl : 'http://localhost:5000' ,
+        // baseUrl: 'http://localhost:5000',
+        baseUrl: 'https://advanced-blog-application-lemon.vercel.app',
         prepareHeaders: (headers, { getState, endpoint }):any => {
             let token: any = getState()
             token = token.auth.accessToken;

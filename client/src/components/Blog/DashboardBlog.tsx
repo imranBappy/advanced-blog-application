@@ -16,12 +16,10 @@ const DashboardBlog = () => {
       </>
     );
   if (isError) content = <Error />;
-  if (blogs)
-    content = blogs.map((blog: any) => (
+  if (data)
+    content = data.map((blog: any) => (
       <Post key={blog._id} _id={blog._id} title={blog.title} />
     ));
-
-  console.log(length);
 
   const handlePage = (page: number) => {
     console.log(page);

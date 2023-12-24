@@ -13,6 +13,9 @@ export const blogApi = apiSlice.injectEndpoints({
                 try {
                     const result = await queryFulfilled;
 
+                    console.log({result});
+                    
+
                     // getBlogs  cash passimstic update
                     dispatch(blogApi.util.updateQueryData('getBlogs', {}, (draft) => {
                         draft.blogs.unshift(result.data);
