@@ -12,14 +12,12 @@ const Blog = (props: any) => {
         {thumbnail && (
           <div>
             <Image
-              className="rounded-t-lg"
+              className="rounded-t-lg w-full"
               src={`${thumbnail}`}
               alt="Next.js Logo"
               width={800}
               height={300}
-              style={{
-                height:400
-              }}
+              
             />
           </div>
         )}
